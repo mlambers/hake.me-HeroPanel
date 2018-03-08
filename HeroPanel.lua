@@ -1,5 +1,5 @@
--- HeroPanel.lua (Version 1.0)
--- Release Date: 2017/5/8
+-- HeroPanel.lua (Version 1.1)
+-- Release Date: 3/8/2018
 
 local HeroPanel = {}
 
@@ -47,7 +47,7 @@ function HeroPanel.OnDraw()
 		local heroName = v[1]
 		local enemyHero = v[2]
 		
-		if not NPC.IsIllusion(enemyHero) and not Entity.IsSameTeam(myHero, enemyHero) then
+		if not NPC.IsIllusion(enemyHero) and not Entity.IsSameTeam(myHero, enemyHero) or heroName == "npc_dota_hero_morphling" and NPC.HasModifier(enemyHero, "modifier_morphling_replicate_manager") and not Entity.IsSameTeam(myHero, enemyHero)  then
 			--Log.Write(NPC.GetCurrentLevel(enemyHero))
 			-- draw hero icon
 			local tmpHeroName
@@ -347,9 +347,8 @@ function HeroPanel.OnDraw()
 			drawY = drawY + lineGap + 10 + 28
 		end
 	end
-	
-	
-	
 end
+
+
 
 return HeroPanel
